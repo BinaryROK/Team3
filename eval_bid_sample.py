@@ -1,10 +1,20 @@
-# 본 코드는 python 3.10에서 테스트 되었습니다.
+# # 본 코드는 python 3.10에서 테스트 되었습니다.
+# <<<<<<< binary
+# #api 예제
+# import requests
+# import json
+# import params as pa
 
-import requests
-import json
+# _API_URL = "https://research-api.solarkim.com"
+# _API_KEY = pa.SOLAR_APIKEY
+# =======
 
-_API_URL = "https://research-api.solarkim.com"
-_API_KEY = "My API Key"  # https://o.solarkim.com/cmpt2023/result에서 확인할 수 있다.
+# import requests
+# import json
+
+# _API_URL = "https://research-api.solarkim.com"
+# _API_KEY = "My API Key"  # https://o.solarkim.com/cmpt2023/result에서 확인할 수 있다.
+# >>>>>>> RYU
 _AUTH_PARAM = {"headers": {"Authorization": f"Bearer {_API_KEY}"}}
 
 

@@ -1,3 +1,8 @@
+# <<<<<<< binary
+
+# #평가산식계산코드
+# =======
+# >>>>>>> RYU
 def calc_profit(actual_gens: list[float], forecast_gens: list[float]):
     CAPACITY = 99.0
     facility_utilization_rate = [actual / CAPACITY for actual in actual_gens]

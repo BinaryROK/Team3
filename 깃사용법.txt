@@ -1,0 +1,9 @@
+git add .
+각자 브랜치만들기
+git branch "브랜치이름"
+브랜치  전환하기
+git checkout "브랜치이름"
+
+git commit -m "변경사항메모"
+
+git push origin "브랜치이름"
