@@ -7,7 +7,7 @@ from keras.layers import Dense, LSTM
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 import joblib
-
+from datetime import datetime
 
 # 데이터 읽어오기
 test_x = pd.read_csv('weather_actual.csv')
@@ -73,12 +73,26 @@ plt.plot(yhat_original, label='Predicted')
 plt.legend()
 plt.show()
 
-model.save(os.path.join("C:\Team3\Model\Model_saved","keras_model.h5"))
+# 모델을 저장할 디렉토리 경로
+model_directory = "C:\\Team3\\Data\\ModelData"
+
+# 현재 시간을 기반으로 디렉토리 생성
+current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+model_directory = os.path.join(model_directory, current_time)
+
+# 디렉토리 생성
+os.makedirs(model_directory, exist_ok=True)
+
+# 모델 파일 이름 생성
+model_file_name = "gen_model.h5"
+
+# 모델을 저장
+model.save(os.path.join(model_directory, model_file_name))
 
 # 데이터 스케일링을 위한 스케일러 객체 생성
 scaler_x.fit(train_x_values)
 scaler_y.fit(train_y_values)
 
 # 스케일러 저장
-joblib.dump(scaler_x, os.path.join("C:\Team3\Model\Model_saved","scaler_x.pkl"))
-joblib.dump(scaler_y, os.path.join("C:\Team3\Model\Model_saved","scaler_y.pkl"))
+joblib.dump(scaler_x, os.path.join(model_directory,"scaler_x.pkl"))
+joblib.dump(scaler_y, os.path.join(model_directory,"scaler_y.pkl"))
