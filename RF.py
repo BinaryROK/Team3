@@ -1,6 +1,8 @@
 import pandas as pd
+import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestRegressor
+import matplotlib.pyplot as plt
 
 # 데이터 읽어오기
 test_x = pd.read_csv('weather_actual.csv')
@@ -26,7 +28,6 @@ test_x_values = test_x.drop('time', axis=1)
 scaler_x.fit(train_x_values)
 scaler_y.fit(train_y_values)
 
-
 train_x_values_scaled = scaler_x.transform(train_x_values)
 train_y_values_scaled = scaler_y.transform(train_y_values)
 test_x_values_scaled = scaler_x.transform(test_x_values)
@@ -47,9 +48,22 @@ test_y['Predicted'] = yhat
 test_y.to_csv('pred_re.csv', index=False)
 
 # 결과 시각화
-import matplotlib.pyplot as plt
 plt.figure(figsize=(15, 6))
 plt.plot(yhat, label='Predicted', alpha=0.5)
 plt.plot(train_y_values, label='Actual', alpha=0.7)
 plt.legend()
+plt.show()
+
+# 특성 중요도 확인 및 시각화
+importances = best_model.feature_importances_
+features = train_x_values.columns
+indices = np.argsort(importances)[::-1]
+
+# 중요도를 그래프로 표시
+plt.figure(figsize=(10, 6))
+plt.title('Feature Importances')
+plt.bar(range(len(features)), importances[indices], color='b', align='center')
+plt.xticks(range(len(features)), [features[i] for i in indices], rotation=90)
+plt.xlabel('Features')
+plt.ylabel('Importance')
 plt.show()
