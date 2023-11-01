@@ -10,6 +10,8 @@ import pandas as pd
 import joblib
 
 
+
+# 학습된 모델을 로드, 예측된 기상데이터를 입력하여 예측발전량 반환
 def gen(DataPath):
     model_directory = "C:\\Team3\\Data\\ModelData"
 

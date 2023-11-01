@@ -10,11 +10,11 @@ import joblib
 from datetime import datetime
 
 # 데이터 읽어오기
-test_x = pd.read_csv('weather_actual.csv')
-test_y = pd.read_csv('pred0re.csv')
+test_x = pd.read_csv('C:\Team3\Data\OIBC2023_data\weather_actual.csv') # test_x 실제기상데이터
+test_y = pd.read_csv('C:\Team3\Data\OIBC2023_data\gens.csv') # test_y 실제 발전량
 
-train_x = pd.read_csv('weather_forecast.csv')
-train_y = pd.read_csv('pred0.csv')
+train_x = pd.read_csv('C:\Team3\Data\OIBC2023_data\weather_forecast.csv') # 예측기상
+train_y = pd.read_csv('pred0.csv') # 예측 발전량
 
 
 
