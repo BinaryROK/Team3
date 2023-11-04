@@ -11,14 +11,14 @@ from datetime import datetime
 
 # api로 기상예측데이터를 가져 온 후 이를 저장된 모델에 학습시켜 예측발전량을 반환하고 이를 Post로 입찰한다.
 
-Date = "2023-11-2"
+Date = "2023-11-4"
 
 
 
 
 
 # 예측발전량 리스트만들기
-df =  pd.DataFrame(api._get_weather_fcst_10(Date))
+df =  pd.DataFrame(api._get_weather_fcst_17(Date))
 
 filename = "WeatherData_"+ Date
 

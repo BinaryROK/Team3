@@ -8,6 +8,7 @@ import pandas as pd
 import os
 from datetime import datetime, timedelta
 import pytz
+import solar_api as api
 
 _API_URL = "https://research-api.solarkim.com"
 _API_KEY = pa.SOLAR_APIKEY
@@ -25,19 +26,9 @@ def _get(url: str):
 
 
 
-date = '2023-10-23'
-bid_round = 1
-# 예측발전량 조회
-gen_fcst = requests.get(f'https://research-api.solarkim.com/cmpt-2023/gen-forecasts/{date}/{bid_round}', headers={
-                            'Authorization': f'Bearer {pa.SOLAR_APIKEY}'
-                        }).json()
-print("예측발전량")
-print(gen_fcst)
+Date = '2023-11-5'
+df = pd.DataFrame(api._get_weather_fcst_10(Date))
+df2 = pd.DataFrame(api._get_weather_fcst_17(Date))
 
-
-# 예측결과 조회
-bid_results = requests.get(f'https://research-api.solarkim.com/open-proc/cmpt-2023/bid-results/{date}', headers={
-                            'Authorization': f'Bearer {pa.SOLAR_APIKEY}'}).json()
-print("예측결과")
-print(bid_results)
-
+#print(df)
+print(df2)

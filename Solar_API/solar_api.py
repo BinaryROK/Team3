@@ -116,6 +116,27 @@ def _get_weather_fcst_10(Date): # 예측기상데이터 받아와 데이터프�
 
     return df
 
+def _get_weather_fcst_17(Date): # 예측기상데이터 받아와 데이터프레임으로 반환하기
+    date = Date
+    bid_round = 2
+    weather_fcst = requests.get(f'https://research-api.solarkim.com/cmpt-2023/weathers-forecasts/{date}/{bid_round}',
+                                headers={
+                                    'Authorization': f'Bearer {pa.SOLAR_APIKEY}'
+                                }).json()
+
+    df = pd.DataFrame(weather_fcst)
+    # 'time' 열이 있는 경우에만 처리
+    if 'time' in df.columns:
+        # 'time' 열을 datetime 형식으로 변환
+        df['time'] = pd.to_datetime(df['time'], utc=True)
+
+        # 서울 시간대로 변환
+        seoul_tz = pytz.timezone('Asia/Seoul')
+        df['time'] = df['time'].dt.tz_convert(seoul_tz)
+
+    return df
+
+
 
 def _get_bids_result(Date): # 더쉐어 예측모델의 발전량 예측 결과 조회
     """

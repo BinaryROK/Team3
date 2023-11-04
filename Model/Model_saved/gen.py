@@ -5,6 +5,7 @@ import joblib
 import torch
 import os
 from datetime import datetime
+from Solar_API import solar_api as api
 
 import pandas as pd
 import joblib
@@ -16,14 +17,15 @@ def gen(DataPath):
     model_directory = "C:\\Team3\\Data\\ModelData"
 
     # ModelData 디렉토리 안의 모든 디렉토리 목록 가져오기
-    subdirectories = [os.path.join(model_directory, d) for d in os.listdir(model_directory) if os.path.isdir(os.path.join(model_directory, d))]
+    #subdirectories = [os.path.join(model_directory, d) for d in os.listdir(model_directory) if os.path.isdir(os.path.join(model_directory, d))]
 
     # 각 디렉토리의 수정 시간을 가져와서 최신 디렉토리 선택
-    latest_directory = max(subdirectories, key=os.path.getctime)
-
+    #latest_directory = max(subdirectories, key=os.path.getctime)
+    latest_directory = r"C:\Team3\Data\ModelData\2023-11-02_01-41-06"
     # 스케일러 로드
-    scaler_x = joblib.load(os.path.join(latest_directory,"scaler_x.pkl"))
-    scaler_y = joblib.load(os.path.join(latest_directory,"scaler_y.pkl"))
+    scaler_x = joblib.load(os.path.join(latest_directory, "scaler_x.pkl"))
+
+    scaler_y = joblib.load(os.path.join(latest_directory, "scaler_y.pkl"))
 
     # 모델 경로
     model_path = os.path.join(latest_directory, "gen_model.h5")
@@ -71,3 +73,14 @@ def gen(DataPath):
     result_df.to_csv(os.path.join(output_directory, file_name), index=False)
 
     return result_df
+if __name__ == "__main__":
+    Date = "2023-11-2"
+    df = pd.DataFrame(api._get_weather_fcst_10(Date))
+
+    filename = "WeatherData_" + Date
+    df.to_csv()
+
+    DataPath = os.path.join("C:\Team3\Data\WeatherData", filename)
+    df.to_csv(DataPath, index=False)
+    print(gen(DataPath))
+
