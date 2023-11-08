@@ -9,7 +9,7 @@ from datetime import datetime
 import os
 
 # 데이터 읽어오기
-# 데이터 읽어오기
+
 test_x = pd.read_csv('C:\Team3\Data\OIBC2023_data\weather_actual.csv') # test_x 실제기상데이터 11616
 test_y = pd.read_csv('C:\Team3\Data\OIBC2023_data\gens.csv') # test_y 실제 발전량 11616
 
