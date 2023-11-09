@@ -63,4 +63,4 @@ def solar_bid_17(Date):
 
 
 Date = "2023-11-10"
-solar_bid_10(Date)
+solar_bid_17(Date)
